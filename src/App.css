@@ -28,6 +28,14 @@
   color: #61dafb;
 }
 
+ul.removeBullets {
+  list-style-type: none;
+}
+
+b {
+  font-weight: normal;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
