@@ -4,7 +4,7 @@ import Axios from "axios";
 
 function App() {
   const [listOfTask, setListOfTask] = useState([]);
-
+  const [show, setShow] = useState(true);
   const inputRef = useRef(null);
   const editRef = useRef(null);
 
@@ -39,10 +39,12 @@ function App() {
 
     Axios.delete(`http://localhost:5000/todo/${id}`).then((response) => {
       console.log(response);
+      inputRef.current.focus();
     });
   };
 
   const edit = (e) => {
+    setShow(false);
     const id = e.target.getAttribute("todo_id");
     const a = document.getElementById(id);
     const b = a.getElementsByTagName("b")[0];
@@ -64,6 +66,8 @@ function App() {
         b.innerText = update;
         console.log(a);
         inputRef.current.value = "";
+        inputRef.current.focus();
+        setShow(true);
       }
     );
   };
@@ -72,33 +76,51 @@ function App() {
     <div className="App">
       <h1>Todo List</h1>
       <input type="text" id="task" ref={inputRef} />
-      <button id="add" onClick={add}>
+
+      <button id="add" onClick={add} style={{ display: show ? true : "none" }}>
         ADD
       </button>
-      <button id="update" ref={editRef} onClick={update}>
+
+      <button
+        id="update"
+        ref={editRef}
+        onClick={update}
+        style={{ display: show ? "none" : true }}
+      >
         UPDATE
       </button>
-      <div>
-        <ul className="removeBullets">
-          {listOfTask.map((d) => {
-            return (
-              <li key={d._id} id={d._id}>
-                <b>{d.todos}</b>
-                <button className="btn1" todo_id={d._id} onClick={edit}>
-                  Edit
-                </button>
-                <button
-                  todoid={d._id}
-                  key={d._id}
-                  className="btn"
-                  onClick={remove}
-                >
-                  Remove
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+
+      <div className="displayTodos">
+        <div className="removeBullets">
+          <table className="table">
+            <tbody>
+              {listOfTask.map((d) => {
+                return (
+                  <tr key={d._id} id={d._id}>
+                    <td>
+                      <b>{d.todos}</b>
+                    </td>
+                    <td>
+                      <button className="btn" todo_id={d._id} onClick={edit}>
+                        Edit
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        todoid={d._id}
+                        key={d._id}
+                        className="btn"
+                        onClick={remove}
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

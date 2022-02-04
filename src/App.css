@@ -1,10 +1,64 @@
 .App {
   text-align: center;
+  height: auto;
+  width: 50%;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(113, 178, 235);
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+input#task {
+  width: 50%;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  margin-top: 10px;
+}
+
+#add {
+  margin-left: 5px;
+  width: auto;
+  height: 55px;
+  border: black solid 1px;
+  border-radius: 5px;
+  background-color: rgb(241, 212, 167);
+}
+
+#update {
+  margin-left: 5px;
+  width: auto;
+  height: 55px;
+  border: black solid 1px;
+  border-radius: 5px;
+}
+
+.displayTodos {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.btn {
+  margin-left: 5px;
+  border: black solid 1px;
+  border-radius: 5px;
+  background-color: rgb(241, 212, 167);
+}
+
+tr {
+  vertical-align: top;
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -28,12 +82,20 @@
   color: #61dafb;
 }
 
-ul.removeBullets {
-  list-style-type: none;
+div.removeBullets {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 b {
   font-weight: normal;
+}
+
+h1 {
+  font-weight: bolder;
+  color: rgb(146, 28, 28);
+  display: block;
 }
 
 @keyframes App-logo-spin {
