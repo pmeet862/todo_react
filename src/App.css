@@ -6,6 +6,8 @@
   align-items: center;
   justify-content: center;
   background-color: rgb(113, 178, 235);
+  border: black solid 3px;
+  border-radius: 10px;
 }
 
 .App-logo {
@@ -16,7 +18,7 @@
 input#task {
   width: 50%;
   height: 50px;
-  border: none;
+  border: black solid 1px;
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
   font-size: 20px;
@@ -46,10 +48,11 @@ input#task {
 .displayTodos {
   text-align: center;
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .btn {
+  height: 25px;
   margin-left: 5px;
   border: black solid 1px;
   border-radius: 5px;
@@ -96,6 +99,10 @@ h1 {
   font-weight: bolder;
   color: rgb(146, 28, 28);
   display: block;
+}
+
+body {
+  background-color: rgb(241, 170, 243);
 }
 
 @keyframes App-logo-spin {

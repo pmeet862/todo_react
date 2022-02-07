@@ -2,6 +2,11 @@ import "./App.css";
 import { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 
+const baseUrl =
+  process.env.REACT_APP_ENV === "STAGING"
+    ? process.env.REACT_APP_stagingBaseUrl
+    : process.env.REACT_APP_productionBaseUrl;
+
 function App() {
   const [listOfTask, setListOfTask] = useState([]);
   const [show, setShow] = useState(true);
@@ -9,7 +14,7 @@ function App() {
   const editRef = useRef(null);
 
   useEffect(() => {
-    Axios.get("http://localhost:5000/todo").then((response) => {
+    Axios.get(baseUrl).then((response) => {
       // console.log(response);
       setListOfTask(response.data);
     });
@@ -17,14 +22,12 @@ function App() {
 
   const add = () => {
     const input = inputRef.current.value.trim();
-    Axios.post("http://localhost:5000/todo", { todos: input }).then(
-      (response) => {
-        console.log(response);
-        const temp = [...listOfTask];
-        temp.push(response.data);
-        setListOfTask(temp);
-      }
-    );
+    Axios.post(baseUrl, { todos: input }).then((response) => {
+      console.log(response);
+      const temp = [...listOfTask];
+      temp.push(response.data);
+      setListOfTask(temp);
+    });
 
     inputRef.current.value = "";
     inputRef.current.focus();
@@ -37,7 +40,7 @@ function App() {
     console.log(a, e.target);
     console.log(id);
 
-    Axios.delete(`http://localhost:5000/todo/${id}`).then((response) => {
+    Axios.delete(`${baseUrl}/${id}`).then((response) => {
       console.log(response);
       inputRef.current.focus();
     });
@@ -58,18 +61,16 @@ function App() {
     const id = e.target.value;
     const update = inputRef.current.value.trim();
 
-    Axios.put(`http://localhost:5000/todo/${id}`, { todos: update }).then(
-      (response) => {
-        console.log(response);
-        const a = document.getElementById(id);
-        const b = a.getElementsByTagName("b")[0];
-        b.innerText = update;
-        console.log(a);
-        inputRef.current.value = "";
-        inputRef.current.focus();
-        setShow(true);
-      }
-    );
+    Axios.put(`${baseUrl}/${id}`, { todos: update }).then((response) => {
+      console.log(response);
+      const a = document.getElementById(id);
+      const b = a.getElementsByTagName("b")[0];
+      b.innerText = update;
+      console.log(a);
+      inputRef.current.value = "";
+      inputRef.current.focus();
+      setShow(true);
+    });
   };
 
   return (
